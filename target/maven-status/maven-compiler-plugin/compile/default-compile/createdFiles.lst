@@ -1,0 +1,6 @@
+com\microservice\configuration\MailProperties.class
+com\microservice\controller\NotificationController.class
+com\microservice\service\MailService.class
+com\microservice\model\User.class
+com\microservice\application\Application.class
+com\microservice\model\Book.class
