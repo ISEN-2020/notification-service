@@ -9,5 +9,14 @@ En réponse de cette requète le micro-service reçois les données formatées e
 Les données en *JSON* sont extraites et transformées afin de former le mail.
 Le mail est ensuite envoyé via le serveur *smtp* de *google*.  
 
-## Modifications
-### La requète *GET*
+## Environnement
+Maven pour la gestions des dépendances et le build  
+JDK version: 1.8
+Spring-boot: 2.1.8
+
+### Packages
+**com.microservice.application**: Point d'entré de l'application, on y trouve le main
+
+| Packages        | Contenu      
+| ------------- |:-------------:|
+|com.microservice.application|Point d'entré de l'application <br> on y trouve le main|
