@@ -43,7 +43,6 @@ public class MailProperties
 		return MessageFormat.format(mailTextMessage, expiredBooks.stream().map(Book::getName).collect(Collectors.toList()));
 	}
 	
-
 	public static MailProperties getInstance()
 	{
 		return instance;
