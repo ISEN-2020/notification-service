@@ -1,23 +1,24 @@
 package com.microservice.service;
 
-import com.microservice.configuration.HttpRequestLendingManagementProperties;
 import com.microservice.model.User;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class HttpService {
 
+    @Autowired
     private final RestTemplate restTemplate;
 
-    public HttpService(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder.build();
+    public HttpService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
-    public User[] getExpiredUsers(String url) {
-        return this.restTemplate.getForObject(url, User[].class);
+    public List<User> getExpiredUsers(String url) {
+        return Arrays.asList(this.restTemplate.getForObject(url, User[].class));
     }
 }

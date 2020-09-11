@@ -7,8 +7,13 @@ public class User {
 	private String name;
 	private String emailAddress;
 	private List<Book> expiredBooks;
-	
-	
+
+	public User(String name, String emailAddress, List<Book> expiredBooks) {
+		this.name = name;
+		this.emailAddress = emailAddress;
+		this.expiredBooks = expiredBooks;
+	}
+
 	public String getName() {
 		return this.name;
 	}
