@@ -3,16 +3,25 @@ package com.microservice.model;
 import java.util.Date;
 
 public class BookRow {
-    private final String book;
-    private final String name;
-    private final String mail;
-    private final Date date;
+    private  int id;
+    private  String book;
+    private  String name;
+    private  String emailAddress;
+    private  Date date;
 
-    public BookRow(String book, String name, String mail, Date date) {
+    public BookRow(){
+
+    }
+    public BookRow(int id, String book, String name, String emailAddress, Date date) {
+        this.id=id;
         this.book = book;
         this.name = name;
-        this.mail = mail;
+        this.emailAddress = emailAddress;
         this.date = date;
+    }
+
+    public int getId(){
+        return this.id;
     }
 
     public String getBook() {
@@ -23,8 +32,8 @@ public class BookRow {
         return this.name;
     }
 
-    public String getMail() {
-        return this.mail;
+    public String getEmailAddress() {
+        return this.emailAddress;
     }
 
     public Date getDate() {

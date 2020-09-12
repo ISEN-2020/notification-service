@@ -16,7 +16,7 @@ public class MailServiceTest extends TestCase {
 
     @Test
     public void testSendEmail() {
-
+        assert(true);
     }
 
 }

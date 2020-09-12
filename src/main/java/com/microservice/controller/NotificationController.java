@@ -26,7 +26,7 @@ public class NotificationController {
     @Autowired
     private HttpService httpService;
 
-    @Scheduled(cron = "0 0 10 1 * MON-FRI", zone = "Europe/Paris")
+    @Scheduled(fixedDelay = 600000 /*cron = "0 0 10 1 * MON-FRI"*/, zone = "Europe/Paris")
     @RequestMapping(value = "/sendEmail", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<HttpStatus> postSendMail() {
