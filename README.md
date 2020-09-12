@@ -14,9 +14,8 @@ Maven pour la gestions des dépendances et le build
 JDK version: 1.8
 Spring-boot: 2.1.8
 
-### Packages
-**com.microservice.application**: Point d'entré de l'application, on y trouve le main
+## Utilisation
+Pour lancer le micro-service localement sur le port 8080, lancer la commande `java -jar microservice-notification-0.0.1.jar`
 
-| Packages        | Contenu      
-| ------------- |:-------------:|
-|com.microservice.application|Point d'entré de l'application <br> on y trouve le main|
+## Ajout d'un end point
+L'ajout d'un *Endpoint* dans le microservice se fait dans la classe `NotificationController.java`
