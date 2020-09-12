@@ -1,8 +1,6 @@
 package com.microservice.controller;
 
 import com.microservice.configuration.HttpRequestLendingManagementProperties;
-import com.microservice.model.Book;
-import com.microservice.model.BookRow;
 import com.microservice.model.User;
 import com.microservice.service.HttpService;
 import com.microservice.service.MailService;
@@ -12,11 +10,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class NotificationController {

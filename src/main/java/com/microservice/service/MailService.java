@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class MailService {
 
     @Autowired
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     public MailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;

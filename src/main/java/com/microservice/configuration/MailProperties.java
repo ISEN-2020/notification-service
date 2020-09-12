@@ -15,14 +15,15 @@ import java.util.stream.Collectors;
 @Configuration
 @PropertySources({@PropertySource("classpath:mailConfig.properties")})
 public class MailProperties {
+    private static MailProperties instance;
     @Value("${mail.subject.message}")
     private String mailSubjectMessage;
     @Value("${mail.text.message}")
     private String mailTextMessage;
 
-
-    private static MailProperties instance;
-
+    public static MailProperties getInstance() {
+        return instance;
+    }
 
     @PostConstruct
     private void init() {
@@ -35,10 +36,6 @@ public class MailProperties {
 
     public String getMailTextMessage(List<Book> expiredBooks) {
         return MessageFormat.format(mailTextMessage, expiredBooks.stream().map(Book::getName).collect(Collectors.toList()));
-    }
-
-    public static MailProperties getInstance() {
-        return instance;
     }
 
 

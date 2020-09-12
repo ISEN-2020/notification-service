@@ -29,9 +29,9 @@ public class HttpService {
     public List<User> managementJsonToUserArrayJson(List<BookRow> booksRow) {
         List<User> users = new ArrayList<>();
 
-        for(String userName : booksRow.stream().map(BookRow::getName).distinct().collect(Collectors.toList())) {
+        for (String userName : booksRow.stream().map(BookRow::getName).distinct().collect(Collectors.toList())) {
             String email = booksRow.stream().filter(row -> row.getName().equals(userName)).map(n -> n.getMail()).findFirst().get();
-            users.add(new User(userName,email,booksRow.stream().filter(row -> row.getName().equals(userName)).map(n -> new Book(n.getBook(),n.getDate()) ).collect(Collectors.toList())));
+            users.add(new User(userName, email, booksRow.stream().filter(row -> row.getName().equals(userName)).map(n -> new Book(n.getBook(), n.getDate())).collect(Collectors.toList())));
         }
         return users;
     }

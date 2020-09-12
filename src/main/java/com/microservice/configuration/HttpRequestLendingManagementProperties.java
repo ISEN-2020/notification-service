@@ -11,12 +11,13 @@ import javax.annotation.PostConstruct;
 @Configuration
 @PropertySources({@PropertySource("classpath:httpRequest.properties")})
 public class HttpRequestLendingManagementProperties {
+    private static HttpRequestLendingManagementProperties instance;
     @Value("${http.request.lending.management}")
     private String httpRequestLendingManagement;
 
-
-    private static HttpRequestLendingManagementProperties instance;
-
+    public static HttpRequestLendingManagementProperties getInstance() {
+        return instance;
+    }
 
     @PostConstruct
     private void init() {
@@ -25,10 +26,6 @@ public class HttpRequestLendingManagementProperties {
 
     public String getHttpRequestLendingManagement() {
         return httpRequestLendingManagement;
-    }
-
-    public static HttpRequestLendingManagementProperties getInstance() {
-        return instance;
     }
 
 

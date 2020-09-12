@@ -4,24 +4,25 @@ import java.util.List;
 
 
 public class User {
-	private String name;
-	private String emailAddress;
-	private List<Book> expiredBooks;
+    private final String name;
+    private final String emailAddress;
+    private final List<Book> expiredBooks;
 
-	public User(String name, String emailAddress, List<Book> expiredBooks) {
-		this.name = name;
-		this.emailAddress = emailAddress;
-		this.expiredBooks = expiredBooks;
-	}
+    public User(String name, String emailAddress, List<Book> expiredBooks) {
+        this.name = name;
+        this.emailAddress = emailAddress;
+        this.expiredBooks = expiredBooks;
+    }
 
-	public String getName() {
-		return this.name;
-	}
-	public String getEmailAddress() {
-		return this.emailAddress;
-	}
-	
-	public List<Book> getExpiredBooks() {
-		return this.expiredBooks;
-	}
+    public String getName() {
+        return this.name;
+    }
+
+    public String getEmailAddress() {
+        return this.emailAddress;
+    }
+
+    public List<Book> getExpiredBooks() {
+        return this.expiredBooks;
+    }
 }
