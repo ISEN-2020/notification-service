@@ -14,6 +14,9 @@ Maven pour la gestions des dépendances et le build
 JDK version: 1.8
 Spring-boot: 2.1.8
 
+## Build
+Le build du code source se fait grâce à *Maven* via la commande `mvn package spring-boot:repackage`.
+
 ## Utilisation
 Pour lancer le micro-service localement sur le port 8080, lancer la commande `java -jar microservice-notification-0.0.1.jar`
 
