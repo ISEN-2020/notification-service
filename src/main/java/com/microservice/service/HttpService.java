@@ -49,7 +49,7 @@ public class HttpService {
         List<User> users = new ArrayList<>();
 
         for (String userName : booksRow.stream().map(BookRow::getName).distinct().collect(Collectors.toList())) {
-            String email = booksRow.stream().filter(row -> row.getName().equals(userName)).map(n -> n.getEmailAddress()).findFirst().get();
+            String email = booksRow.stream().filter(row -> row.getName().equals(userName)).map(n -> n.getEmailAddress()).findFirst().orElse(null);
             users.add(new User(userName, email, booksRow.stream().filter(row -> row.getName().equals(userName)).map(n -> new Book(n.getBook(), n.getDate())).collect(Collectors.toList())));
         }
         return users;
