@@ -22,6 +22,3 @@ Pour lancer le micro-service localement sur le port 8080, lancer la commande `ja
 
 ## Ajout d'un end point
 L'ajout d'un *Endpoint* dans le microservice se fait dans la classe `NotificationController.java`
-
-
-allez l'om
