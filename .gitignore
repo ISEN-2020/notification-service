@@ -2,3 +2,5 @@
 target
 microservice-notification.iml
 .project
+*.prefs
+.classpath
