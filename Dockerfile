@@ -1,5 +1,7 @@
 FROM maven:3.6.3-openjdk-14-slim AS MAVEN_BUILD
 
+EXPOSE 9000
+
 COPY pom.xml /build/
 COPY src /build/src/
 WORKDIR /build/
