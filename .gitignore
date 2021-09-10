@@ -1,3 +1,6 @@
 .idea
 target
 microservice-notification.iml
+.classpath
+.project
+*.prefs
