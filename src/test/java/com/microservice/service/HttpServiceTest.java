@@ -3,15 +3,15 @@ package com.microservice.service;
 import com.microservice.model.Book;
 import com.microservice.model.BookRow;
 import com.microservice.model.User;
-import static org.hamcrest.CoreMatchers.*;
+//import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import org.junit.Assert;
+//import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+//import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 
