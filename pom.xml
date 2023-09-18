@@ -64,29 +64,35 @@
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.9.4</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase> <!-- Exécutez l'analyse SonarQube lors de la phase de vérification -->
+                        <goals>
+                            <goal>sonar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-             <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.7</version>
-        <executions>
-            <execution>
-                <goals>
-                    <goal>prepare-agent</goal>
-                </goals>
-            </execution>
-            <!-- attached to Maven test phase -->
-            <execution>
-                <id>report</id>
-                <phase>test</phase>
-                <goals>
-                    <goal>report</goal>
-                </goals>
-            </execution>
-        </executions>
-    </plugin>
-            
+            <plugin>
+                 <groupId>org.jacoco</groupId>
+                 <artifactId>jacoco-maven-plugin</artifactId>
+                 <version>0.8.7</version>
+                 <executions>
+                     <execution>
+                         <goals>
+                             <goal>prepare-agent</goal>
+                         </goals>
+                     </execution>
+                     <!-- attached to Maven test phase -->
+                     <execution>
+                         <id>report</id>
+                         <phase>test</phase>
+                         <goals>
+                             <goal>report</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>
         </plugins>
     </build>
-
 </project>
