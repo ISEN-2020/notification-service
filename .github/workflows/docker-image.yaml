@@ -45,4 +45,3 @@ jobs:
             -Dsonar.projectKey=ISEN-2020_notification-service \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.organization=isen-2020
-
