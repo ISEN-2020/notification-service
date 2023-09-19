@@ -3,15 +3,13 @@ package com.microservice.service;
 import com.microservice.model.Book;
 import com.microservice.model.BookRow;
 import com.microservice.model.User;
-//import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-//import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-//import org.mockito.Mockito;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -56,11 +54,11 @@ public class HttpServiceTest {
 
     @Test
     public void getExpiredUsersTest() {
-        //  BookRow[] bookRowArray = bookRows.toArray(new BookRow[0]);
+        BookRow[] bookRowArray = bookRows.toArray(new BookRow[0]);
 
-    //    Mockito.when(restTemplate.getForObject("http://java.sun.com/j2se/1.3/", BookRow[].class))
-   //             .thenReturn(bookRowArray);
+      Mockito.when(restTemplate.getForObject("http://java.sun.com/j2se/1.3/", BookRow[].class))
+             .thenReturn(bookRowArray);
 
- //       assertArrayEquals(bookRowArray, httpService.getExpiredUsers("http://java.sun.com/j2se/1.3/").toArray());
+        assertArrayEquals(bookRowArray, httpService.getExpiredUsers("http://java.sun.com/j2se/1.3/").toArray());
     }
 }
