@@ -63,7 +63,7 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.4</version>
+                <version>3.9.1.2184</version>
                 <executions>
                     <execution>
                         <phase>verify</phase> <!-- Exécutez l'analyse SonarQube lors de la phase de vérification -->
