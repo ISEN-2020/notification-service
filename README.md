@@ -28,3 +28,11 @@ To launch the microservice locally on port 8080, run the command `java -jar micr
 
 ## Adding an end point
 The addition of an *Endpoint* in the microservice is done in the class `NotificationController.java`.
+
+## Generate report for the test 
+You need to download the code on your computer. (git clone or juste dl the zip file)
+After you need to open a terminal and change the directory to go to the folder name notification-service (if you haven't change the name).
+Once you are on the folder you need this command line 'mvn clean install'
+After you need to generate report with jacoco with 'mvn jacoco:report'
+And finally you will the generate file name index.html on the following path : target/site/jacoco/index.html
+Of course you need to install maven plugin. You can find tutorials on the web
