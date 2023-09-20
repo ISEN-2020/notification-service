@@ -1,7 +1,11 @@
+package com.microservice.configuration;
+
 import org.junit.Before;
 import org.junit.Test;
+import com.microservice.model.Book;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -26,9 +30,9 @@ public class MailPropertiesTest {
     @Test
     public void testGetMailTextMessage() {
         List<Book> expiredBooks = Arrays.asList(
-                new Book("Book 1"),
-                new Book("Book 2"),
-                new Book("Book 3")
+                new Book("Book 1", new Date()),
+                new Book("Book 2", new Date()),
+                new Book("Book 3", new Date())
         );
 
         String expectedText = "You have the following expired books: [Book 1, Book 2, Book 3]";
