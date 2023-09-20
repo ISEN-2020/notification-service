@@ -58,7 +58,7 @@ public class HttpServiceTest {
 
       //Mockito.when(restTemplate.getForObject("http://java.sun.com/j2se/1.3/", BookRow[].class))
          //    .thenReturn(bookRowArray);
-//probleme bookRowArray ou le résultat de httpService.getExpiredUsers(...)) est null a c orriger
+       //probleme bookRowArray ou le résultat de httpService.getExpiredUsers(...)) est null a corriger
        // assertArrayEquals(bookRowArray, httpService.getExpiredUsers("http://java.sun.com/j2se/1.3/").toArray());
     }
 }
