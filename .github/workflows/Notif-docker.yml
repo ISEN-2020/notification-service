@@ -6,92 +6,92 @@ on:
       - main
 
 env: 
-  MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
+   MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
 
 jobs: 
-  generate-notif:
-    name: generate notification service and build docker image
-    runs-on: ubuntu-latest
-    
-    steps:
-      # step 1: checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # step 2: Set up Python
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+    generate-notif:
+      name: generate notification service and build docker image
+      runs-on: ubuntu-latest
       
-      # step 3: Install dependencies
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+      steps:
+        # step 1: checkout the code
+        - name: Checkout code
+          uses: actions/checkout@v3
 
-      - name: Lint with flake8
-        run: |
-          flake8 .
-
-      # step 4: Generate notification service for Python using Anchore's action
-      - name: Generate SBOM for Python
-        uses: anchore/sbom-action@v0
-        with:
-          format: json
-          artifact-name: sbom-python.json
+        # step 2: Set up Python
+        - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.x'
         
-      # step 5: Build Docker image
-      - name: Build Docker Image
-        run: |
-          docker build -t my-python-app:latest .
+        # step 3: Install dependencies
+        - name: Install Python dependencies
+          run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
 
-      # step 6: Generate SBOM for Docker image using Anchore's SBOM Action
-      - name: Generate SBOM for Docker image
-        uses: anchore/sbom-action@v0
-        with:
-          image: my-python-app:latest
-          format: json
-          artifact-name: sbom-docker-image.json
+        - name: Lint with flake8
+          run: |
+            flake8 .
 
-  sonarcloud:
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GTB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  Trivy:
-    permissions:
-      contents: read
-      security-events: write
-      actions: read
-    name: Trivy
-    runs-on: "ubuntu-20.04"
-    steps: 
-      - name: Checkout code
-        uses: actions/checkout@v4
+        # step 4: Generate notification service for Python using Anchore's action
+        - name: Generate SBOM for Python
+          uses: anchore/sbom-action@v0
+          with:
+            format: json
+            artifact-name: sbom-python.json
           
-      - name: Build an image from Dockerfile
-        run: |
-          docker build -t docker.io/###/###:${{ github.sha }} .
-          
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
-        with:
-          image-ref: 'docker.io/###/###:${{ github.sha }}'
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
-          output: 'trivy-results.sarif'
-          severity: 'CRITICAL,HIGH'
+        # step 5: Build Docker image
+        - name: Build Docker Image
+          run: |
+            docker build -t my-python-app:latest .
 
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: 'trivy-results.sarif'
+        # step 6: Generate SBOM for Docker image using Anchore's SBOM Action
+        - name: Generate SBOM for Docker image
+          uses: anchore/sbom-action@v0
+          with:
+            image: my-python-app:latest
+            format: json
+            artifact-name: sbom-docker-image.json
+
+    sonarcloud:
+      name: SonarCloud
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+        - name: SonarCloud Scan
+          uses: SonarSource/sonarcloud-github-action@master
+          env:
+            GITHUB_TOKEN: ${{ secrets.GTB_TOKEN }}
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    Trivy:
+      permissions:
+        contents: read
+        security-events: write
+        actions: read
+      name: Trivy
+      runs-on: "ubuntu-20.04"
+      steps: 
+        - name: Checkout code
+          uses: actions/checkout@v4
+            
+        - name: Build an image from Dockerfile
+          run: |
+            docker build -t docker.io/maggeggvr/notication-service:${{ github.sha }} .
+            
+        - name: Run Trivy vulnerability scanner
+          uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
+          with:
+            image-ref: 'docker.io/maggeggivr/notification-service:${{ github.sha }}'
+            format: 'template'
+            template: '@/contrib/sarif.tpl'
+            output: 'trivy-results.sarif'
+            severity: 'CRITICAL,HIGH'
+
+        - name: Upload Trivy scan results to GitHub Security tab
+          uses: github/codeql-action/upload-sarif@v3
+          with:
+            sarif_file: 'trivy-results.sarif'
