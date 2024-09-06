@@ -15,10 +15,12 @@ SENDER_PASSWORD = os.environ["MAILPASSWORD"]
 ADMIN_EMAIL = "admin@library.com"
 CHECK_INTERVAL = 86400  # 24 hours in seconds
 
+
 def fetch_books():
     """Fetch books from the API"""
     response = requests.get(API_URL)
     return response.json()
+
 
 def send_email(to_email, subject, body):
     """Send an email notification"""
@@ -31,6 +33,7 @@ def send_email(to_email, subject, body):
         server.starttls()
         server.login(SENDER_EMAIL, SENDER_PASSWORD)
         server.send_message(msg)
+
 
 def check_and_notify():
     """Check for books nearing due date and send notifications"""
@@ -53,8 +56,12 @@ def check_and_notify():
     if expired_books:
         admin_notification = "The following books are overdue:\n"
         for book in expired_books:
-            admin_notification += f"- '{book['title']}' due on {book['due_date']}, borrowed by {book['user_email']}\n"
-        send_email(ADMIN_EMAIL, "Overdue Books Report", admin_notification)
+            admin_notification += (
+                f"- '{book['title']}' due on {book['due_date']}, "
+                f"borrowed by {book['user_email']}\n"
+            )
+            send_email(ADMIN_EMAIL, "Overdue Books Report", admin_notification)
+
 
 def run_service():
     """Run the notification service"""
@@ -63,6 +70,7 @@ def run_service():
         print(f"Checking books at {datetime.now()}")
         check_and_notify()
         time.sleep(CHECK_INTERVAL)
+
 
 if __name__ == "__main__":
     run_service()
