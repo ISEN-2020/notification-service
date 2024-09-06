@@ -38,19 +38,14 @@ Other configuration parameters are set in the `notif_users_expiration.py` file:
    ```
 4. In order to access your application, apply the following command:
    ```
-   kubectl apply -f deployment.yaml
-   ```
-5. Apply the service:
-   ```
    kubectl apply -f service.yaml
    ```
-
-6. Build the Docker image:
+5. Build the Docker image:
    ```
    docker build -t library-notification-service .
    ```
 
-7. Run the Docker container:
+6. Run the Docker container:
    ```
    docker run -e MAILPASSWORD=Cristaline123 library-notification-service
    ```
