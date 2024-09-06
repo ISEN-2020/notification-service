@@ -8,9 +8,9 @@ import time
 
 # Configuration
 API_URL = "https://api.library.com/books"
-SMTP_SERVER = "smtp.gmail.com"
+SMTP_SERVER = "smtp-mail.outlook.com"
 SMTP_PORT = 587
-SENDER_EMAIL = "noreply.saintbranchs@gmail.com"
+SENDER_EMAIL = "SaintBranchs-Biblio@outlook.com"
 SENDER_PASSWORD = os.environ["MAILPASSWORD"]
 ADMIN_EMAIL = "admin@library.com"
 CHECK_INTERVAL = 86400
