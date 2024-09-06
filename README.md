@@ -31,13 +31,21 @@ Other configuration parameters are set in the `notif_users_expiration.py` file:
 ## Installation and Running
 
 1. Clone this repository to your local machine.
-
-2. Build the Docker image:
+2. Place yourself in it.
+3. Deploy your application with the following command:
+   ```
+   kubectl apply -f deployment.yaml
+   ```
+4. In order to access your application, apply the following command:
+   ```
+   kubectl apply -f service.yaml
+   ```
+5. Build the Docker image:
    ```
    docker build -t library-notification-service .
    ```
 
-3. Run the Docker container:
+6. Run the Docker container:
    ```
    docker run -e MAILPASSWORD=Cristaline123 library-notification-service
    ```
