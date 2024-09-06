@@ -25,6 +25,10 @@ jobs:
           run: |
             flake8 .
 
+        - name: login to Docker Hub
+          run: |
+            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            
         - name: Kubernetes deployment
           run: |
             kubectl apply -f deployment.yaml
@@ -36,10 +40,6 @@ jobs:
         - name: Build an image from Dockerfile
           run: |
             docker build -t docker.io/maggeggivr/notification-service:${{ github.sha }} .
-
-        - name: login to Docker Hub
-          run: |
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
         - name: Push the image to Docker Hub
           run: |
