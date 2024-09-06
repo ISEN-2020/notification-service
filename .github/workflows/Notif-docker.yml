@@ -9,18 +9,6 @@ env:
    MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
 
 jobs:
-    steps:
-        - name: Checkout code
-          uses: actions/checkout@v3
-
-        - name: Set up Python
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.x'
-        
-        - name: Lint with flake8
-          run: |
-            flake8 .
 
     Trivy:
       name: Trivy
@@ -46,6 +34,19 @@ jobs:
           uses: github/codeql-action/upload-sarif@v3
           with:
             sarif_file: 'trivy-results.sarif'
+
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+
+        - name: Set up Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.x'
+        
+        - name: Lint with flake8
+          run: |
+            flake8 .
 
     sonarcloud:
       name: SonarCloud
