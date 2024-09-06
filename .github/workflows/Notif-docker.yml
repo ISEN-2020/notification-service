@@ -9,13 +9,16 @@ env:
    MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
 
 jobs:
-    
     Trivy:
       name: Trivy
       runs-on: "ubuntu-latest"
       steps:
         - name: Checkout code
           uses: actions/checkout@v4
+        
+        - name: Lint with flask8
+          run: |
+            flake8 .
     
         - name: Build an image from Dockerfile
           run: |
