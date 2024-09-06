@@ -2,9 +2,8 @@ import os
 import requests
 import smtplib
 from email.mime.text import MIMEText
-from datetime import datetime, timedelta
+from datetime import datetime
 import time
-
 
 # Configuration
 API_URL = "https://api.library.com/books"
@@ -36,30 +35,24 @@ def send_email(to_email, subject, body):
 
 
 def check_and_notify():
-    """Vérifier les livres proches de la date et envoyer des notif"""
+    """Vérifier les livres et envoyer des notifications"""
     books = fetch_books()
-    today = datetime.now()
-    notification_threshold = today + timedelta(days=3)
     expired_books = []
 
     for book in books:
-        due_date = datetime.strptime(book['due_date'], '%Y-%m-%d')
-        if today <= due_date <= notification_threshold:
-            send_email(
-                book['user_email'],
-                "Rappel de retour de livre",
-                f"Veuillez retourner '{book['title']}' avant",
-                f"le {book['due_date']}."
-            )
-        elif due_date < today:
-            expired_books.append(book)
+        send_email(
+            book['user_email'],
+            "Rappel de retour de livre",
+            f"Veuillez retourner le livre avec ID {book['book_id']}."
+        )
+        expired_books.append(book)
 
     if expired_books:
         admin_notification = "Les livres suivants sont en retard :\n"
         for book in expired_books:
             admin_notification += (
-                f"- '{book['title']}' dû le {book['due_date']}, "
-                f"emprunté par {book['user_email']}\n"
+                f"- Livre ID {book['book_id']},",
+                f" emprunté par {book['user_email']}\n"
             )
         send_email(ADMIN_EMAIL, "Rapport des livres en retard",
                    admin_notification)
