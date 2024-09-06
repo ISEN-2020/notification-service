@@ -5,8 +5,8 @@ on:
     branches:
       - main
 
-env: 
-  MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
+# env: 
+#   MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
 
 jobs: 
   generate-notif:
