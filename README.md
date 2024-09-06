@@ -38,7 +38,7 @@ Other configuration parameters are set in the `notif_users_expiration.py` file:
    ```
 4. In order to access your application, apply the following command:
    ```
-   kubectl apply -f deployment.yaml
+   kubectl apply -f service.yaml
    ```
 5. Build the Docker image:
    ```
