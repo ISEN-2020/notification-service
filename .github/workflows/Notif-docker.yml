@@ -3,7 +3,7 @@ name: Build and Analyse Notification Service
 on:
   push:
     branches:
-      - main
+      - master
 
 env: 
    MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
