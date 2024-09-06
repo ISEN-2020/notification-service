@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env: 
+  MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
+
 jobs: 
     generate-notif:
       name: generate notification service and build docker image
@@ -26,6 +29,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Lint with flake8
+        run: |
+          flake8 .
 
       # step 4: Generate notification service for Ptyhon using Anchore's action
       - name: Generate SBOM for Python
@@ -59,7 +66,6 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GTB_TOKEN }}  # Needed to get PR information, if any
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
 
     Trivy:
         permisions:
@@ -79,3 +85,13 @@ jobs:
           - name: Run Trivy vulnerability scanner
             uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
             with:
+              image-ref: 'docker.io/###/###:${{ github.sha }}'
+              format: 'template'
+              template: '@/contrib/sarif.tpl'
+              output: 'trivy-results.sarif'
+              severity: 'CRITICAL,HIGH'
+
+          - name: Upload Trivy scan results to GitHub Security tab
+            uses: github/codeql-action/upload-sarif@v3
+            with:
+              sarif_file: 'trivy-results.sarif'
