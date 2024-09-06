@@ -52,20 +52,24 @@ jobs:
         security-events: write
         actions: read
       name: Trivy
-      runs-on: "ubuntu-lastest"
-      steps: 
+      runs-on: "ubuntu-20.04"
+      steps:
         - name: Checkout code
           uses: actions/checkout@v4
-            
+
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
           with:
-            image-ref: 'docker.io/maggeggivr/notification-service:${{ github.sha }}'
-            format: 'table'
-            exit-code: '1'
-            ignore-unfixed: true
-            vuln-type: 'os,library'
-            severity: 'CRITICAL,HIGH'
+              image-ref: 'docker.io/maggeggivr/notification-service:${{ github.sha }}'
+              format: 'template'
+              template: '@/contrib/sarif.tpl'
+              output: 'trivy-results.sarif'
+              severity: 'CRITICAL,HIGH'
+    
+        - name: Upload Trivy scan results to GitHub Security tab
+          uses: github/codeql-action/upload-sarif@v3
+          with:
+            sarif_file: 'trivy-results.sarif'
 
         # step 6: Generate SBOM for Docker image using Anchore's SBOM Action
         - name: Generate SBOM for Docker image
