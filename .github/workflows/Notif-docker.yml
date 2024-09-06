@@ -1,0 +1,81 @@
+name: Build and Analyse Notification Service
+
+on:
+  push:
+    branches:
+      - main
+
+jobs: 
+    generate-notif:
+      name: generate notification service and build docker image
+      runs-on: ubuntu-latest
+    
+      step:
+      # step 1: checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # step 2: Set up Python
+      - name: Step up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      
+      # step 3: Install dependencies
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # step 4: Generate notification service for Ptyhon using Anchore's action
+      - name: Generate SBOM for Python
+        uses: anchore/sbom-action@v0
+        with:
+          format: json
+          artifact-name: sbom-python.json
+        
+      # step 5: Build Docker image
+      - name: Build Docker Image
+        run: |
+          docker build -t my-python-app:lastest .
+
+      # step 6: Generate SBOM for Docker image using Anchore's SBOM Action
+      - name: Generate SBOM for Docker image
+        uses: anchore/sbom-action@v0
+        with:
+          image: my-python-app:latest
+          format: json
+          artifact-name: sbom-docker-image.json
+
+    sonarcloud:
+      name: SonarCloud
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+        - name: SonarCloud Scan
+          uses: SonarSource/sonarcloud-github-action@master
+          env:
+            GITHUB_TOKEN: ${{ secrets.GTB_TOKEN }}  # Needed to get PR information, if any
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
+
+    Trivy:
+        permisions:
+          contents: read
+          security-events: write
+          actions: read
+        name: Trivy
+        runs-on: "ubuntu-20.04"
+        step: 
+          - name: Checkout code
+            uses: actions/checkout@v4
+          
+          - name: Build an image from Dockerfile
+            run: |
+              docker build -t docker.io/###/###:${{ github.sha }} .
+          
+          - name: Run Trivy vulnerability scanner
+            uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
+            with:
