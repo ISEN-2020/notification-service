@@ -42,7 +42,7 @@ def check_and_notify():
     for book in books:
         send_email(
             book['user_email'],
-            "Rappel de retour de livre",
+            "Rappel de retour de livre"
             f"Veuillez retourner le livre avec ID {book['book_id']}."
         )
         expired_books.append(book)
@@ -51,7 +51,7 @@ def check_and_notify():
         admin_notification = "Les livres suivants sont en retard :\n"
         for book in expired_books:
             admin_notification += (
-                f"- Livre ID {book['book_id']},",
+                f"- Livre ID {book['book_id']},"
                 f" emprunté par {book['user_email']}\n"
             )
         send_email(ADMIN_EMAIL, "Rapport des livres en retard",
