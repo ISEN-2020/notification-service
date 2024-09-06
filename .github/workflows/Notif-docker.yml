@@ -75,7 +75,7 @@ jobs:
         - name: Generate SBOM for Docker image
           uses: anchore/sbom-action@v0
           with:
-            image: my-python-app:latest
+            image: notification-service:latest
             format: json
             artifact-name: sbom-docker-image.json
 
