@@ -1,7 +1,14 @@
 import unittest
 from unittest.mock import patch
-from notif_users_expiration import fetch_books, send_email, check_and_notify
 
+import os
+
+# Set the environment variable before importing the module
+os.environ['MAILPASSWORD'] = 'Cristaline123'
+
+from notif_users_expiration import fetch_books
+from notif_users_expiration import send_email
+from notif_users_expiration import check_and_notify
 
 class TestNotifUsersExpiration(unittest.TestCase):
 
@@ -38,9 +45,9 @@ class TestNotifUsersExpiration(unittest.TestCase):
             {"user_email": "rapdpx@gmail.com", "book_id": 123},
             {"user_email": "rapdrgpx@gmail.com", "book_id": 123456}
         ]
-
+    
         check_and_notify()
-
+    
         self.assertEqual(mock_send_email.call_count, 3)
         mock_send_email.assert_any_call(
             "rapdpx@gmail.com",
@@ -55,9 +62,9 @@ class TestNotifUsersExpiration(unittest.TestCase):
         mock_send_email.assert_any_call(
             "enzovargaspro83520@gmail.com",
             "Rapport des livres en retard",
-            "Les livres suivants sont en retard :\n- Livre ID 123, emprunté",
-            "par rapdpx@gmail.com\n- Livre ID 123456, emprunté par ",
-            "rapdrgpx@gmail.com\n"
+            "Les livres suivants sont en retard :\n"
+            "- Livre ID 123, emprunté par rapdpx@gmail.com\n"
+            "- Livre ID 123456, emprunté par rapdrgpx@gmail.com\n"
         )
 
 
