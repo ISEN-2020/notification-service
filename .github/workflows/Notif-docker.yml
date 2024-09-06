@@ -21,14 +21,34 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
 
+        - name: Run unit tests
+          run: |
+           pytest
+
         - name: Lint with flake8
           run: |
             flake8 .
+
+        - name: login to Docker Hub
+          run: |
+            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            
+        # - name: Kubernetes deployment
+        #   run: |
+        #     kubectl apply -f deployment.yaml
+
+        # - name: Kubernetes service
+        #   run: |
+        #     kubectl apply -f service.yaml
     
         - name: Build an image from Dockerfile
           run: |
             docker build -t docker.io/maggeggivr/notification-service:${{ github.sha }} .
-    
+
+        - name: Push the image to Docker Hub
+          run: |
+            docker push docker.io/maggeggivr/notification-service:${{ github.sha }}
+
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
           with:
