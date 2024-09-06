@@ -8,39 +8,7 @@ on:
 env: 
    MAIL_PASSWORD: ${{ secrets.MAILPASSWORD }}
 
-jobs: 
-    generate-notif:
-      name: generate notification service and build docker image
-      runs-on: ubuntu-latest
-      
-      steps:
-        # step 1: checkout the code
-        - name: Checkout code
-          uses: actions/checkout@v3
-
-        # step 2: Set up Python
-        - name: Set up Python
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.x'
-        
-        # step 3: Install dependencies
-        - name: Install Python dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-
-        - name: Lint with flake8
-          run: |
-            flake8 .
-
-        # step 4: Generate notification service for Python using Anchore's action
-        - name: Generate SBOM for Python
-          uses: anchore/sbom-action@v0
-          with:
-            format: json
-            artifact-name: sbom-python.json
-          
+jobs:     
         # step 5: Build Docker image
     Trivy:
       permissions:
