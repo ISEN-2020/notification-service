@@ -82,7 +82,8 @@ jobs:
           uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
           with:
             image-ref: 'docker.io/maggeggivr/notification-service:${{ github.sha }}'
-            format: 'template'
-            template: '@/contrib/sarif.tpl'
-            output: 'trivy-results.sarif'
+            format: 'table'
+            exit-code: '1'
+            ignore-unfixed: true
+            vuln-type: 'os,library'
             severity: 'CRITICAL,HIGH'
