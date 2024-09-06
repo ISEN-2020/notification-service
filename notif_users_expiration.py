@@ -12,7 +12,7 @@ SMTP_SERVER = "smtp-mail.outlook.com"
 SMTP_PORT = 587
 SENDER_EMAIL = "SaintBranchs-Biblio@outlook.com"
 SENDER_PASSWORD = os.environ["MAILPASSWORD"]
-ADMIN_EMAIL = "admin@library.com"
+ADMIN_EMAIL = "enzovargaspro83520@gmail.com"
 CHECK_INTERVAL = 86400
 
 
