@@ -29,13 +29,13 @@ jobs:
           run: |
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             
-        - name: Kubernetes deployment
-          run: |
-            kubectl apply -f deployment.yaml
+        # - name: Kubernetes deployment
+        #   run: |
+        #     kubectl apply -f deployment.yaml
 
-        - name: Kubernetes service
-          run: |
-            kubectl apply -f service.yaml
+        # - name: Kubernetes service
+        #   run: |
+        #     kubectl apply -f service.yaml
     
         - name: Build an image from Dockerfile
           run: |
