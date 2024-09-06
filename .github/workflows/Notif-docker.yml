@@ -16,7 +16,7 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v4
         
-        - name: Lint with flask8
+        - name: Lint with flake8
           run: |
             flake8 .
     
