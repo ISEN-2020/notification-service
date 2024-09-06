@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Démarrer l'application
-CMD ["python", "app.py"]
+CMD ["python", "notif_users_expiration.py.py"]
