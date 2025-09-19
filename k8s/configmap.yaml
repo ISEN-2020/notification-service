@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notif-config
+data:
+  API_URL: "http://lending-management:8080/getExpiredBooks"
+  DAYS_BEFORE: "3"
+  SMTP_SERVER: "smtp-mail.outlook.com"
+  SMTP_PORT: "587"
+  SENDER_EMAIL: "notifications@votre-domaine.tld"
+  SMTP_USERNAME: "notifications@votre-domaine.tld"
+  ADMIN_EMAIL: "admin@votre-domaine.tld"
+  RUN_MODE: "cron"
+  REQUEST_TIMEOUT: "10"
+  VERIFY_TLS: "true"
