@@ -44,7 +44,7 @@ Other configuration parameters are set in the `notif_users_expiration.py` file:
    ```
    docker build -t library-notification-service .
    ```
-
+ 
 6. Run the Docker container:
    ```
    docker run -e MAILPASSWORD=Cristaline123 library-notification-service
