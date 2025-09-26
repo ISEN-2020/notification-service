@@ -7,16 +7,16 @@ import time
 
 # Configuration
 API_URL = "https://api.library.com/books"
-SMTP_SERVER = "smtp-mail.outlook.com"
+SMTP_SERVER = "smtp-mail.gmail.com"
 SMTP_PORT = 587
-SENDER_EMAIL = "SaintBranchs-Biblio@outlook.com"
+SENDER_EMAIL = "notifbiblio@gmail.com"
 SENDER_PASSWORD = os.environ["MAILPASSWORD"]
-ADMIN_EMAIL = "enzovargaspro83520@gmail.com"
+ADMIN_EMAIL = "notifbiblio@gmail.com"
 CHECK_INTERVAL = 86400
 
 
 def fetch_books():
-    """Récupérer les livres de l'API"""
+    """Recuperer les livres de l'API"""
     response = requests.get(API_URL)
     return response.json()
 
@@ -35,7 +35,7 @@ def send_email(to_email, subject, body):
 
 
 def check_and_notify():
-    """Vérifier les livres et envoyer des notifications"""
+    """Verifier les livres et envoyer des notifications"""
     books = fetch_books()
     expired_books = []
 
@@ -43,7 +43,7 @@ def check_and_notify():
         send_email(
             book['user_email'],
             "Rappel de retour de livre"
-            f"Veuillez retourner le livre avec ID {book['book_id']}."
+            f"Veuillez retourner le livre avec l'ID {book['book_id']}."
         )
         expired_books.append(book)
 
@@ -52,17 +52,17 @@ def check_and_notify():
         for book in expired_books:
             admin_notification += (
                 f"- Livre ID {book['book_id']},"
-                f" emprunté par {book['user_email']}\n"
+                f" emprunte par {book['user_email']}\n"
             )
-        send_email(ADMIN_EMAIL, "Rapport des livres en retard",
+        send_email(ADMIN_EMAIL, "Rapport des livres en retard :",
                    admin_notification)
 
 
 def run_service():
-    """Exécuter le service de notification"""
-    print("Démarrage du service de notification de la bibliothèque")
+    """Executer le service de notification"""
+    print("Demarrage du service de notification de la bibliotheque")
     while True:
-        print(f"Vérification des livres à {datetime.now()}")
+        print(f"Verification des livres à {datetime.now()}")
         check_and_notify()
         time.sleep(CHECK_INTERVAL)
 
