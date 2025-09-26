@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier le reste du code de l'application
+# Copier le reste du code de l'application 
 COPY . .
 
 # Démarrer l'application
