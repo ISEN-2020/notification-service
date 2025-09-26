@@ -4,7 +4,7 @@ import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime
 import time
-
+ 
 # Configuration
 API_URL = "https://api.library.com/books"
 SMTP_SERVER = "smtp-mail.gmail.com"
